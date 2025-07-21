@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keysmash Lore Decoder</title>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+      padding: 2rem;
+    }
+    textarea {
+      width: 90%;
+      height: 100px;
+      background: #222;
+      color: #0f0;
+      border: none;
+      font-size: 1rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #0f0;
+      color: #111;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Keysmash Lore Decoder</h1>
+  <p>Smash your keyboard and receive a message from your subconscious mind in English, Hindi & Japanese</p>
+
+  <textarea id="smashInput" placeholder="smash keyboard here idiot..."></textarea>
+  <br />
+  <button onclick="decodeSmash()">Decode Smash</button>
+  <div id="result"></div>
+
+  <script>
+    const dictionary = {
+      english: [
+        { word: "love", meaning: "Love bloomed in forgotten corners" },
+        { word: "apple", meaning: "An apple fell and destiny shifted" },
+        { word: "water", meaning: "Water flowed, washing away secrets" },
+        { word: "yes", meaning: "Someone dared to say yes" },
+        { word: "school", meaning: "The school echoed with silent memories" },
+        { word: "game", meaning: "The game twisted into reality" },
+        { word: "tv", meaning: "A TV flickered lost footage" },
+        { word: "phone", meaning: "The phone buzzed with hidden truths" },
+        { word: "bread", meaning: "Bread was shared in silence" },
+        { word: "hello", meaning: "Hello opened the portal to the unknown" }
+      ],
+      hindi: [
+        { word: "pani", script: "पानी", meaning: "पानी गिरा आसमान से (Water fell from the sky)" },
+        { word: "mujhe", script: "मुझे", meaning: "मुझे वह सपना याद है (I remember that dream)" },
+        { word: "dost", script: "दोस्त", meaning: "एक दोस्त हमेशा साथ था (A friend was always there)" },
+        { word: "haan", script: "हाँ", meaning: "हाँ, वह आया था (Yes, he came)" },
+        { word: "chai", script: "चाय", meaning: "चाय की खुशबू फैल गई (The aroma of tea spread)" },
+        { word: "thanda", script: "ठंडा", meaning: "सब कुछ ठंडा हो गया (Everything turned cold)" },
+        { word: "khushi", script: "खुशी", meaning: "खुशी चुपके से आई (Joy came quietly)" },
+        { word: "naam", script: "नाम", meaning: "नाम हवा में गूंजा (A name echoed in the wind)" },
+        { word: "kya", script: "क्या", meaning: "क्या यह सच था? (Was it true?)" },
+        { word: "hoon", script: "हूँ", meaning: "मैं अब भी वही हूँ (I am still the same)" }
+      ],
+      japanese: [
+        { word: "oden", script: "おでん", romaji: "Oden", meaning: "おでんは心で煮込まれた (Oden simmered with spirit)" },
+        { word: "neko", script: "猫", romaji: "Neko", meaning: "猫が屋根の上で踊った (A cat danced on the roof)" },
+        { word: "baka", script: "バカ", romaji: "Baka", meaning: "バカ！と彼は怒鳴った (Idiot! he shouted)" },
+        { word: "kaiju", script: "怪獣", romaji: "Kaijuu", meaning: "怪獣が影から現れた (A monster emerged from the shadows)" },
+        { word: "ramen", script: "ラーメン", romaji: "Rāmen", meaning: "温かいラーメンが心を癒した (Warm ramen healed the soul)" },
+        { word: "watashi", script: "私", romaji: "Watashi", meaning: "私は一人でさまよった (I wandered alone)" },
+        { word: "sensei", script: "先生", romaji: "Sensei", meaning: "先生は真実を知っていた (The teacher knew the truth)" },
+        { word: "nihon", script: "日本", romaji: "Nihon", meaning: "日本は夜明けに輝いた (Japan shined at dawn)" },
+        { word: "kawaii", script: "かわいい", romaji: "Kawaii", meaning: "かわいい笑顔が心を溶かした (A cute smile melted hearts)" },
+        { word: "arigato", script: "ありがとう", romaji: "Arigatou", meaning: "ありがとうのささやきが空気に満ちた (A whisper of thanks filled the air)" }
+      ]
+    };
+
+    function decodeSmash() {
+      const input = document.getElementById("smashInput").value.toLowerCase();
+      let parts = [];
+
+      dictionary.english.forEach(entry => {
+        if (input.includes(entry.word)) parts.push(`[EN: ${entry.word}] ${entry.meaning}`);
+      });
+      dictionary.hindi.forEach(entry => {
+        if (input.includes(entry.word)) parts.push(`[HI: ${entry.word} / ${entry.script}] ${entry.meaning}`);
+      });
+      dictionary.japanese.forEach(entry => {
+        if (input.includes(entry.word)) parts.push(`[JP: ${entry.word} / ${entry.script} / ${entry.romaji}] ${entry.meaning}`);
+      });
+
+      let resultText = "🧠 Your subconscious mind says:\n\n";
+      if (parts.length === 0) {
+        resultText += "We found nothing, idiot 😭 Try smashing harder!";
+      } else {
+        resultText += parts.join(". ") + ".";
+      }
+
+      document.getElementById("result").textContent = resultText;
+    }
+  </script>
+</body>
+</html>
